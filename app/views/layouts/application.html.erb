@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Easy School" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 dark:bg-gray-900">
+
+    <%= render 'layouts/sidebar' %>
+    <%= render 'layouts/navbar' %>
+
+    <div class="p-4 sm:ml-64">
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

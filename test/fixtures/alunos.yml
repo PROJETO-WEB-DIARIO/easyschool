@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  nacionalidade: MyString
+  municipio_nascimento: MyString
+  uf_nascimento: MyString
+  data_nascimento: 2025-05-23
+  sexo: MyString
+  cor_raca: MyString
+  nome_mae: MyString
+  cpf_mae: MyString
+  rg_mae: MyString
+  funcao_mae: MyString
+  nome_pai: MyString
+  cpf_pai: MyString
+  rg_pai: MyString
+  funcao_pai: MyString
+
+two:
+  nome: MyString
+  nacionalidade: MyString
+  municipio_nascimento: MyString
+  uf_nascimento: MyString
+  data_nascimento: 2025-05-23
+  sexo: MyString
+  cor_raca: MyString
+  nome_mae: MyString
+  cpf_mae: MyString
+  rg_mae: MyString
+  funcao_mae: MyString
+  nome_pai: MyString
+  cpf_pai: MyString
+  rg_pai: MyString
+  funcao_pai: MyString

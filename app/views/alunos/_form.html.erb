@@ -1,0 +1,92 @@
+<%= form_with(model: aluno, class: "contents") do |form| %>
+  <% if aluno.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(aluno.errors.count, "error") %> prohibited this aluno from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% aluno.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :nome %>
+    <%= form.text_field :nome, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:nome].none?, "border-red-400 focus:outline-red-600": aluno.errors[:nome].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :nacionalidade %>
+    <%= form.text_field :nacionalidade, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:nacionalidade].none?, "border-red-400 focus:outline-red-600": aluno.errors[:nacionalidade].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :municipio_nascimento %>
+    <%= form.text_field :municipio_nascimento, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:municipio_nascimento].none?, "border-red-400 focus:outline-red-600": aluno.errors[:municipio_nascimento].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :uf_nascimento %>
+    <%= form.text_field :uf_nascimento, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:uf_nascimento].none?, "border-red-400 focus:outline-red-600": aluno.errors[:uf_nascimento].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :data_nascimento %>
+    <%= form.date_field :data_nascimento, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:data_nascimento].none?, "border-red-400 focus:outline-red-600": aluno.errors[:data_nascimento].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :sexo %>
+    <%= form.text_field :sexo, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:sexo].none?, "border-red-400 focus:outline-red-600": aluno.errors[:sexo].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :cor_raca %>
+    <%= form.text_field :cor_raca, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:cor_raca].none?, "border-red-400 focus:outline-red-600": aluno.errors[:cor_raca].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :nome_mae %>
+    <%= form.text_field :nome_mae, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:nome_mae].none?, "border-red-400 focus:outline-red-600": aluno.errors[:nome_mae].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :cpf_mae %>
+    <%= form.text_field :cpf_mae, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:cpf_mae].none?, "border-red-400 focus:outline-red-600": aluno.errors[:cpf_mae].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :rg_mae %>
+    <%= form.text_field :rg_mae, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:rg_mae].none?, "border-red-400 focus:outline-red-600": aluno.errors[:rg_mae].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :funcao_mae %>
+    <%= form.text_field :funcao_mae, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:funcao_mae].none?, "border-red-400 focus:outline-red-600": aluno.errors[:funcao_mae].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :nome_pai %>
+    <%= form.text_field :nome_pai, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:nome_pai].none?, "border-red-400 focus:outline-red-600": aluno.errors[:nome_pai].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :cpf_pai %>
+    <%= form.text_field :cpf_pai, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:cpf_pai].none?, "border-red-400 focus:outline-red-600": aluno.errors[:cpf_pai].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :rg_pai %>
+    <%= form.text_field :rg_pai, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:rg_pai].none?, "border-red-400 focus:outline-red-600": aluno.errors[:rg_pai].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :funcao_pai %>
+    <%= form.text_field :funcao_pai, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:funcao_pai].none?, "border-red-400 focus:outline-red-600": aluno.errors[:funcao_pai].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
