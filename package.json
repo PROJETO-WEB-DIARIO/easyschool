@@ -1,0 +1,28 @@
+{
+  "name": "easyschool",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PROJETO-WEB-DIARIO/easyschool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PROJETO-WEB-DIARIO/easyschool/issues"
+  },
+  "homepage": "https://github.com/PROJETO-WEB-DIARIO/easyschool#readme"
+}

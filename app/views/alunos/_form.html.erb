@@ -12,9 +12,17 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :nome %>
-    <%= form.text_field :nome, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": aluno.errors[:nome].none?, "border-red-400 focus:outline-red-600": aluno.errors[:nome].any?}] %>
+  <%= form.label :nome, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.text_field :nome, 
+      placeholder: "John", 
+      required: true,
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": aluno.errors[:nome].any? }
+      ] %>
   </div>
+
 
   <div class="my-5">
     <%= form.label :nacionalidade %>
