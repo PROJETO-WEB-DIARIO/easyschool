@@ -1,24 +1,12 @@
+
+
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Site desenvolvido para disciplina de Programação Avançada e Projeto de Desenvolvimento de Software para WEB para obtenção de nota para UNIRIOS (Paulo Afonso)
 
-Things you may want to cover:
+A seguir esta o passo-a-passo para instalação e execução do site
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1- Execute Git clone
+2- Instale o Ruby Installer com o devkit
+3- Execute o comando: 'bundle'
+4 - Execute o projeto com o comando 'bin/dev.bat'
