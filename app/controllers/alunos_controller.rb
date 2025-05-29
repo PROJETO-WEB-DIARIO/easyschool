@@ -3,7 +3,15 @@ class AlunosController < ApplicationController
 
   # GET /alunos or /alunos.json
   def index
-    @alunos = Aluno.all.then(&paginate)
+    search_term = params[:search]
+
+    @alunos = if search_term.present?
+      Aluno.where("nome LIKE ?", "%#{search_term}%")
+    else
+      Aluno.all
+    end
+
+    @alunos = @alunos.then(&paginate)
     @per_page = per_page
   end
 

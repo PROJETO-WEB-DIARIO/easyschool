@@ -10,19 +10,25 @@
     <%= link_to "Novo Aluno", new_aluno_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <% if @alunos.any? %>
-
   <div class="pb-4">
-        <label for="table-search" class="sr-only">Search</label>
-        <div class="relative mt-1">
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-4 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
-            <input type="text" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar aluno">
-        </div>
+  <label for="table-search" class="sr-only">Search</label>
+  <div class="relative mt-1">
+    <!-- Ícone de lupa à esquerda do input -->
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <i class="fas fa-search text-gray-500 dark:text-gray-400"></i>  <!-- Ícone de lupa do FontAwesome -->
     </div>
+
+    <!-- Campo de pesquisa com ícone da lupa à esquerda -->
+    <%= form_with(url: alunos_path, method: :get, local: true) do %>
+      <input type="search" name="search" value="<%= params[:search] %>" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar Aluno" />
+    <% end %>
+  </div>
+</div>
+
+  <!-- Mensagem de nenhum aluno encontrado, mas a tabela é mantida -->
+  <% if @alunos.empty? && params[:search].present? %>
+    <p class="text-center text-red-500 mb-4">Nenhum aluno encontrado para "<%= params[:search] %>"</p>
+  <% end %>
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -56,37 +62,33 @@
       </tbody>
     </table>
   </div>
+
   <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-  <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
-    Exibindo <span class="font-semibold text-gray-900 dark:text-white"><%= @alunos.count %></span> de <span class="font-semibold text-gray-900 dark:text-white"><%= Aluno.count %></span>
-  </span>
-  <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-    <!-- Link para a página anterior -->
-    <% if params[:page].to_i > 1 %>
-      <li>
-        <%= link_to 'Anterior', alunos_path(page: params[:page].to_i - 1), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-      </li>
-    <% end %>
+    <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+      Exibindo <span class="font-semibold text-gray-900 dark:text-white"><%= @alunos.count %></span> de <span class="font-semibold text-gray-900 dark:text-white"><%= Aluno.count %> Alunos</span>
+    </span>
+    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+      <!-- Link para a página anterior -->
+      <% if params[:page].to_i > 1 %>
+        <li>
+          <%= link_to 'Anterior', alunos_path(page: params[:page].to_i - 1, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+        </li>
+      <% end %>
 
-    <!-- Links de páginas -->
-    <% total_pages = (Aluno.count / @per_page.to_f).ceil %>
-    <% (1..total_pages).each do |page| %>
-      <li>
-        <%= link_to page, alunos_path(page: page), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-      </li>
-    <% end %>
+      <!-- Links de páginas -->
+      <% total_pages = (Aluno.count / @per_page.to_f).ceil %>
+      <% (1..total_pages).each do |page| %>
+        <li>
+          <%= link_to page, alunos_path(page: page, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+        </li>
+      <% end %>
 
-    <!-- Link para a próxima página -->
-    <% if params[:page].to_i < total_pages %>
-      <li>
-        <%= link_to 'Próxima', alunos_path(page: params[:page].to_i + 1), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-      </li>
-    <% end %>
-  </ul>
-</nav>
-
-<% else %>
-  <p class="text-center my-10">Nenhum aluno encontrado.</p>
-<% end %>
-
+      <!-- Link para a próxima página -->
+      <% if params[:page].to_i < total_pages %>
+        <li>
+        <%= link_to 'Próxima', alunos_path(page: params[:page].to_i + 1, search: params[:search]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
 </div>
