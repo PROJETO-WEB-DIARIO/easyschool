@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_28_225617) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_29_010719) do
   create_table "alunos", force: :cascade do |t|
     t.string "nome"
     t.string "nacionalidade"
@@ -27,6 +27,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_225617) do
     t.string "cpf_pai"
     t.string "rg_pai"
     t.string "funcao_pai"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "year"
+    t.string "series"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

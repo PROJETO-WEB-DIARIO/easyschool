@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :classrooms
   resource :session
   resources :passwords, param: :token
   resources :alunos
