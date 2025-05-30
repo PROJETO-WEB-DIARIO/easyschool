@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
     @total_sessions = Session.count
 
     # Distribuição de sexo dos alunos
-    @gender_distribution = Student.group(:sexo).count
+    @gender_distribution = Student.group(:gender).count
 
     # Calculando a idade dos alunos, ignorando alunos sem data de nascimento
     @age_distribution = Student.all.group_by do |student|
@@ -13,6 +13,6 @@ class DashboardController < ApplicationController
       Date.today.year - student.date_of_birth.year
     end.compact
 
-    @age_distribution = @idade_distribution.transform_values(&:count)
+    @age_distribution = @age_distribution.transform_values(&:count)
   end
 end
