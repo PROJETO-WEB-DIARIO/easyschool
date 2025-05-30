@@ -3,11 +3,12 @@ class ClassroomsController < ApplicationController
 
   # GET /classrooms or /classrooms.json
   def index
-    @classrooms = Classroom.all
+    @classrooms = Classroom.includes(:students).all
   end
 
   # GET /classrooms/1 or /classrooms/1.json
   def show
+    
   end
 
   # GET /classrooms/new
@@ -49,18 +50,29 @@ class ClassroomsController < ApplicationController
 
   # DELETE /classrooms/1 or /classrooms/1.json
   def destroy
-    @classroom.destroy!
+ 
+    if @classroom.students.any?
+      respond_to do |format|
+        format.html { redirect_to classrooms_url, alert: "Não foi possível excluir a turma '#{@classroom.name}' porque ela ainda possui alunos vinculados." }
+        format.json { render json: { error: "Cannot delete classroom with associated students." }, status: :unprocessable_entity }
+      end
+    else
+      @classroom.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to classrooms_path, status: :see_other, notice: "Classroom was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to classrooms_url, notice: "Turma '#{@classroom.name}' foi excluída com sucesso." }
+        format.json { head :no_content }
+      end
     end
+  
   end
 
-  private
+   private
     # Use callbacks to share common setup or constraints between actions.
     def set_classroom
-      @classroom = Classroom.find(params.expect(:id))
+      @classroom = Classroom.find(params[:id])
+      # Se você vai exibir os alunos na página show, adicione includes aqui também
+      # @classroom = Classroom.includes(:students).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

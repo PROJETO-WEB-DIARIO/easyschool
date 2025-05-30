@@ -1,6 +1,6 @@
 <div id="<%= dom_id student %>" class="w-full sm:w-auto my-5 space-y-5">
   <div>
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium mb-1">Nome do aluno:</strong>
     <%= student.name %>
   </div>
 
@@ -71,14 +71,14 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Possui Bolsa Familia:</strong>
-    <%= student.has_family_allowance? ? "Yes" : "No" %>
+    <%= student.has_family_allowance? ? "Sim" : "Não" %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Possui Deficiência:</strong>
-    <%= student.has_disability? ? "Yes" : "No" %>
+    <%= student.has_disability? ? "Sim" : "Não" %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Requer dispensa da disciplina de ensino religioso:</strong>
-    <%= student.requires_religious_education_exemption? ? "Yes" : "No" %>
+    <%= student.requires_religious_education_exemption? ? "Sim" : "Não" %>
   </div>
 </div>

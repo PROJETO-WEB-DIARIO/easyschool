@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   resources :classrooms
   resource :session
   resources :passwords, param: :token
-  resources :alunos
+  resources :students
   resources :users
 
-  root "alunos#index"
+  root "students#index"
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

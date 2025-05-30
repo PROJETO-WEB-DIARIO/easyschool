@@ -9,8 +9,8 @@ class StudentsController < ApplicationController
 
     # Adicione a lógica de pesquisa, se houver
     if params[:search].present?
-      # Exemplo de pesquisa por nome ou email (ajuste conforme seus campos)
-      @students = Student.where("name ILIKE ? OR email ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      # ALTERE AQUI: Mude ILIKE para LIKE
+      @students = Student.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     else
       @students = Student.all
     end
@@ -18,10 +18,9 @@ class StudentsController < ApplicationController
     # Aplica a paginação
     @students = @students.limit(@per_page).offset((@page - 1) * @per_page)
 
-    # Nota: Student.count deve ser feito ANTES de aplicar o limit/offset
-    # Se você fizer Student.count depois, ele contará apenas os resultados da página atual
     @total_students_count = if params[:search].present?
-                              Student.where("name ILIKE ? OR email ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").count
+                              # ALTERE AQUI: Mude ILIKE para LIKE
+                              Student.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").count
                             else
                               Student.count
                             end

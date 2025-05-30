@@ -10,16 +10,16 @@
     <%= link_to "Nova Turma", new_classroom_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <% if @classrooms.any? %>  <!-- Verifica se existem turmas -->
+  <% if @classrooms.any? %>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th class="px-6 py-4">Turma</th>
-            <th class="px-6 py-4">Ano</th>
-            <th class="px-6 py-4">Série</th>
-            <th class="px-6 py-4">Alunos</th>
-            <th class="px-6 py-4">Ações</th>
+            <th scope="col" class="px-6 py-3">Turma</th>
+            <th scope="col" class="px-6 py-3">Ano</th>
+            <th scope="col" class="px-6 py-3">Série</th>
+            <th scope="col" class="px-6 py-3">Alunos</th> <%# Nova Coluna %>
+            <th scope="col" class="px-6 py-3">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +28,13 @@
               <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= classroom.name %></td>
               <td class="px-6 py-4"><%= classroom.year %></td>
               <td class="px-6 py-4"><%= classroom.series %></td>
+              <td class="px-6 py-4"> <%# Conteúdo da Nova Coluna %>
+                <% if classroom.students.any? %>
+                  <%= classroom.students.map(&:name).join(", ") %> <%# Lista nomes dos alunos separados por vírgula %>
+                <% else %>
+                  Nenhum aluno
+                <% end %>
+              </td>
               <td class="px-6 py-4 flex gap-2">
                 <%= link_to "Exibir", classroom, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
                 <%= link_to "Editar", edit_classroom_path(classroom), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
@@ -39,7 +46,6 @@
       </table>
     </div>
   <% else %>
-    <p class="text-center my-10">No classrooms found.</p>  <!-- Exibe mensagem se não houver turmas -->
+    <p class="text-center my-10 text-gray-600 dark:text-gray-400">Nenhuma turma encontrada.</p>
   <% end %>
-
 </div>
