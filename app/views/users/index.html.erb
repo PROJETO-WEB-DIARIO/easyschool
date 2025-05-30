@@ -45,7 +45,6 @@
             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= user.email_address %></td>
             <td class="px-6 py-4"><%= user.role.capitalize %></td>
             <td class="px-6 py-4 flex gap-2">
-              <%= link_to "Exibir", user, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
               <%= link_to "Editar", edit_user_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
               <%= button_to "Excluir", user, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
             </td>
