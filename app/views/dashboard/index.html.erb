@@ -1,0 +1,33 @@
+<h1 class="mb-10 font-bold text-4xl green-50 dark:text-white">Dashboard</h1>
+
+<div class="grid grid-cols-4 gap-6">
+  <!-- Total de Alunos -->
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Total de Alunos</h2>
+    <p class="text-2xl font-bold"><%= @total_alunos %></p>
+  </div>
+
+  <!-- Total de Turmas (Classrooms) -->
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Total de Turmas</h2>
+    <p class="text-2xl font-bold"><%= @total_classrooms %></p>
+  </div>
+
+  <!-- Total de Sessões (Sessions) -->
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Transferidos</h2>
+    <p class="text-2xl font-bold"><%= @total_sessions %></p>
+  </div>
+
+  <!-- Total de Sessões (Sessions) -->
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Desistentes</h2>
+    <p class="text-2xl font-bold"><%= @total_sessions %></p>
+  </div>
+</div>
+
+<div class="mt-8">
+  <!-- Gráfico de Distribuição de Sexo -->
+  <h2 class="font-semibold text-xl green-50 dark:text-white">Alunos por Turma</h2>
+  <%= pie_chart @sexo_distribution, id: "sexo-distribuicao", height: "300px" %>
+</div>
