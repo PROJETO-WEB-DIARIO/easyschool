@@ -8,8 +8,16 @@
                <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
          </button>
-        <a href="../students" class="flex ms-2 md:me-24">
-          <img src="https://pub-cc9917beef4a4ccd908af381b1b2afb6.r2.dev/logo_easyschool_branco.png" class="h-8 me-3" alt="Logo EasySchool" />
+        <a href="../dashboard" class="flex ms-2 md:me-24">
+          <%# Logo preta (modo claro) %>
+          <img src="https://pub-cc9917beef4a4ccd908af381b1b2afb6.r2.dev/logo_easyschool_preto.png"
+              class="h-8 me-3 block dark:hidden"
+              alt="Logo EasySchool" />
+
+          <%# Logo branca (modo escuro) %>
+          <img src="https://pub-cc9917beef4a4ccd908af381b1b2afb6.r2.dev/logo_easyschool_branco.png"
+              class="h-8 me-3 hidden dark:block"
+              alt="Logo EasySchool" />
         </a>
       </div>
       <div class="flex items-center">
@@ -26,15 +34,15 @@
                   Neil Sims
                 </p>
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                  neil.sims@flowbite.com
+                  <%= current_user.email_address %>
                 </p>
               </div>
               <ul class="py-1" role="none">
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Alterar Imagem</a>
                 </li>
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Aparência</a>
                 </li>
                 <li>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
@@ -49,3 +57,4 @@
     </div>
   </div>
 </nav>
+
