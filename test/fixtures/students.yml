@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  cpf: MyString
+  rg: MyString
+  nationality: MyString
+  gender: MyString
+  race: MyString
+  phone: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  father_name: MyString
+  father_name_cpf: MyString
+  mother_name: MyString
+  mother_name_cpf: MyString
+  has_family_allowance: false
+  has_disability: false
+  requires_religious_education_exemption: false
+
+two:
+  name: MyString
+  email: MyString
+  cpf: MyString
+  rg: MyString
+  nationality: MyString
+  gender: MyString
+  race: MyString
+  phone: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  father_name: MyString
+  father_name_cpf: MyString
+  mother_name: MyString
+  mother_name_cpf: MyString
+  has_family_allowance: false
+  has_disability: false
+  requires_religious_education_exemption: false

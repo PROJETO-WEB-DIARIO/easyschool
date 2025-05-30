@@ -1,0 +1,84 @@
+<div id="<%= dom_id student %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= student.name %>
+  </div>
+
+<div>
+    <strong class="block font-medium mb-1">Data de Nascimento:</strong>
+    <%= student.date_of_birth %>
+  </div>
+
+  <div>
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= student.email %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">CPF:</strong>
+    <%= student.cpf %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">RG:</strong>
+    <%= student.rg %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Nacionalidade:</strong>
+    <%= student.nationality %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Sexo:</strong>
+    <%= student.gender %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Raça:</strong>
+    <%= student.race %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Telefone:</strong>
+    <%= student.phone %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Endereço:</strong>
+    <%= student.address %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Cidade:</strong>
+    <%= student.city %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Estado:</strong>
+    <%= student.state %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">CEP:</strong>
+    <%= student.zip_code %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Nome do Pai:</strong>
+    <%= student.father_name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">CPF Pai:</strong>
+    <%= student.father_name_cpf %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Nome da Mãe:</strong>
+    <%= student.mother_name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">CPF Mãe:</strong>
+    <%= student.mother_name_cpf %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Possui Bolsa Familia:</strong>
+    <%= student.has_family_allowance? ? "Yes" : "No" %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Possui Deficiência:</strong>
+    <%= student.has_disability? ? "Yes" : "No" %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Requer dispensa da disciplina de ensino religioso:</strong>
+    <%= student.requires_religious_education_exemption? ? "Yes" : "No" %>
+  </div>
+</div>

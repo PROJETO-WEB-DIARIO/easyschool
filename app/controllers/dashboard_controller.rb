@@ -1,18 +1,18 @@
 class DashboardController < ApplicationController
   def index
-    @total_alunos = Aluno.count
+    @total_students = Student.count
     @total_classrooms = Classroom.count
     @total_sessions = Session.count
 
     # Distribuição de sexo dos alunos
-    @sexo_distribution = Aluno.group(:sexo).count
+    @gender_distribution = Student.group(:sexo).count
 
     # Calculando a idade dos alunos, ignorando alunos sem data de nascimento
-    @idade_distribution = Aluno.all.group_by do |aluno|
-      next if aluno.data_nascimento.nil?
-      Date.today.year - aluno.data_nascimento.year
+    @age_distribution = Student.all.group_by do |student|
+      next if student.date_of_birth.nil?
+      Date.today.year - student.date_of_birth.year
     end.compact
 
-    @idade_distribution = @idade_distribution.transform_values(&:count)
+    @age_distribution = @idade_distribution.transform_values(&:count)
   end
 end
