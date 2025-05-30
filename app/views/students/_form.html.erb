@@ -70,6 +70,31 @@
   </div>
 
   <div class="my-5">
+    <%= form.label :birth_city, "Município de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.text_field :birth_city,
+      placeholder: "Nome da Cidade de Nascimento",
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": student.errors[:birth_city].any? }
+      ] %>
+  </div>
+
+  <div class="my-5">
+  <%= form.label :birth_state, "UF de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.select :birth_state,
+    ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
+     'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
+     'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
+    { include_blank: 'Selecione a UF de Nascimento' },
+    class: [
+      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+      { "border-red-400 focus:outline-red-600": student.errors[:birth_state].any? }
+    ] %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :gender, "Sexo", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%# Você pode usar um select para Sexo, que é mais robusto %>
     <%= form.select :gender, ['Masculino', 'Feminino', 'Outro', 'Não Declarado'],
@@ -92,6 +117,8 @@
         { "border-red-400 focus:outline-red-600": student.errors[:skin_color_or_race].any? }
       ] %>
   </div>
+
+  <h3 class="text-lg font-semibold green-50 dark:text-white">Telefone e Endereço</h3>
 
   <div class="my-5">
     <%= form.label :phone, "Telefone", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
@@ -127,14 +154,17 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :state, "Estado", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-    <%= form.text_field :state,
-      placeholder: "UF (Ex: SP)",
-      class: [
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
-        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        { "border-red-400 focus:outline-red-600": student.errors[:state].any? }
-      ] %>
+  <%= form.label :state, "Estado (UF)", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.select :state,
+    ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
+     'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
+     'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
+    { include_blank: 'Selecione o Estado (UF)' },
+    class: [
+      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+      { "border-red-400 focus:outline-red-600": student.errors[:state].any? }
+    ] %>
   </div>
 
   <div class="my-5">
@@ -149,28 +179,6 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :birth_city, "Município de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-    <%= form.text_field :birth_city,
-      placeholder: "Nome da Cidade de Nascimento",
-      class: [
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
-        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        { "border-red-400 focus:outline-red-600": student.errors[:birth_city].any? }
-      ] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :birth_state, "UF de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-    <%= form.text_field :birth_state,
-      placeholder: "UF (Ex: BA)",
-      class: [
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
-        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        { "border-red-400 focus:outline-red-600": student.errors[:birth_state].any? }
-      ] %>
-  </div>
-
-  <div class="my-5">
     <%= form.label :date_of_birth, "Data de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.date_field :date_of_birth,
       class: [
@@ -180,7 +188,7 @@
       ] %>
   </div>
 
-  <h3 class="text-lg font-semibold my-5">Dados da Mãe</h3>
+  <h3 class="text-lg font-semibold green-50 dark:text-white">Dados da Mãe</h3>
 
   <div class="my-5">
     <%= form.label :mother_name, "Nome da Mãe", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
@@ -226,7 +234,7 @@
       ] %>
   </div>
 
-  <h3 class="text-lg font-semibold my-5">Dados do Pai (Opcional)</h3>
+  <h3 class="text-lg font-semibold green-50 dark:text-white">Dados do Pai (Opcional)</h3>
 
   <div class="my-5">
     <%= form.label :father_name, "Nome do Pai", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
@@ -272,7 +280,7 @@
       ] %>
   </div>
 
-  <h3 class="text-lg font-semibold my-5">Informações Adicionais</h3>
+  <h3 class="text-lg font-semibold green-50 dark:text-white">Informações Adicionais</h3>
 
   <div class="my-5">
     <div class="flex items-center">
@@ -295,7 +303,8 @@
     </div>
   </div>
 
-  <h3 class="text-lg font-semibold my-5">Matricular em Turmas</h3>
+  <h3 class="text-lg font-semibold green-50 dark:text-white">Matricular em Turmas</h3>
+
   <div class="my-5 border p-4 rounded-md bg-gray-50 dark:bg-gray-700">
     <% if Classroom.any? %>
       <% Classroom.all.each do |classroom| %>
@@ -308,7 +317,6 @@
       <p class="text-sm text-gray-600 dark:text-gray-400">Nenhuma turma cadastrada. Por favor, crie uma turma primeiro.</p>
     <% end %>
   </div>
-
 
   <div class="inline mt-5">
     <%= form.submit "Salvar Aluno", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
