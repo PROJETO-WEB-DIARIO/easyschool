@@ -63,31 +63,33 @@
       </table>
     </div>
 
-    <%# --- Bloco de Paginação (atualizado para incluir o search e filter_by param) --- %>
-    <nav aria-label="Page navigation example" class="flex justify-center mt-4">
-      <ul class="inline-flex -space-x-px text-base h-10">
-        <% if @page > 1 %>
-          <li>
-            <%= link_to 'Anterior', transfers_path(page: @page - 1, search: params[:search], filter_by: params[:filter_by]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-          </li>
-        <% end %>
+    <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+  <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+    Exibindo <span class="font-semibold text-gray-900 dark:text-white"><%= @items.count %></span> de <span class="font-semibold text-gray-900 dark:text-white"><%= @total_items_count %></span>
+  </span>
+  
+  <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+    <% if @page > 1 %>
+      <li>
+        <%= link_to 'Anterior', polymorphic_path([controller_name.to_sym], page: @page - 1, search: params[:search], filter_by: params[:filter_by]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+      </li>
+    <% end %>
 
-        <% total_pages = (@total_transfers_count / @per_page.to_f).ceil %>
-        <% (1..total_pages).each do |page| %>
-          <li>
-            <% current_page_class = (page == @page) ? "text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white" : "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-            <%= link_to page, transfers_path(page: page, search: params[:search], filter_by: params[:filter_by]), class: "flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 #{current_page_class}" %>
-          </li>
-        <% end %>
+    <% total_pages = (@total_items_count / @per_page.to_f).ceil %>
+    <% (1..total_pages).each do |page| %>
+      <% is_current = page == @page %>
+      <li>
+        <%= link_to page, polymorphic_path([controller_name.to_sym], page: page, search: params[:search], filter_by: params[:filter_by]), class: "flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 #{is_current ? 'text-blue-600 bg-blue-50 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}" %>
+      </li>
+    <% end %>
 
-        <% if @page < total_pages %>
-          <li>
-            <%= link_to 'Próxima', transfers_path(page: @page + 1, search: params[:search], filter_by: params[:filter_by]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
-    <%# --- Fim do Bloco de Paginação --- %>
+    <% if @page < total_pages %>
+      <li>
+        <%= link_to 'Próxima', polymorphic_path([controller_name.to_sym], page: @page + 1, search: params[:search], filter_by: params[:filter_by]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
 
   <% else %>
     <p class="text-center my-10 text-gray-600 dark:text-gray-400">Nenhuma transferência encontrada.</p>

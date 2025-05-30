@@ -6,7 +6,7 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Alunos</h1>
+    <h1 class="mb-10 font-bold text-4xl green-50 dark:text-white">Alunos</h1>
     <%= link_to "Novo Aluno", new_student_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
@@ -36,7 +36,7 @@
         <tr>
           <th class="px-6 py-4">Nome</th>
           <th class="px-6 py-4">Nascimento</th>
-          <th class="px-6 py-4">Nacionalidade</th>
+          <th class="px-6 py-4">Turma</th>
           <th class="px-6 py-4">Município Nascimento</th>
           <th class="px-6 py-4">UF</th>
           <th class="px-6 py-4">Sexo</th>
@@ -48,7 +48,13 @@
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= student.name %></td>
             <td class="px-6 py-4"><%= student.date_of_birth.strftime('%d/%m/%Y') if student.date_of_birth %></td>
-            <td class="px-6 py-4"><%= student.nationality %></td>
+            <td class="px-6 py-4">
+              <% if student.classrooms.any? %>
+                <%= student.classrooms.map(&:name).join(", ") %>
+              <% else %>
+                Sem turma
+              <% end %>
+            </td>
             <td class="px-6 py-4"><%= student.city %></td>
             <td class="px-6 py-4"><%= student.state %></td>
             <td class="px-6 py-4"><%= student.gender %></td>
@@ -63,30 +69,34 @@
     </table>
   </div>
 
-  <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-    <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
-      Exibindo <span class="font-semibold text-gray-900 dark:text-white"><%= @students.count %></span> de <span class="font-semibold text-gray-900 dark:text-white"><%= Student.count %> Alunos</span>
-    </span>
-    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-      <!-- Link para a página anterior -->
-      <% if params[:page].to_i > 1 %>
-        <li>
-          <%= link_to 'Anterior', students_path(page: params[:page].to_i - 1, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-        </li>
-      <% end %>
+  <% total_pages = (Student.count / @per_page.to_f).ceil %>
+<% current_page = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
 
-      <!-- Links de páginas -->
-      <% total_pages = (Student.count / @per_page.to_f).ceil %>
-      <% (1..total_pages).each do |page| %>
-        <li>
-          <%= link_to page, students_path(page: page, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-        </li>
-      <% end %>
+<nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+  <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+    Exibindo <span class="font-semibold text-gray-900 dark:text-white"><%= @students.count %></span> de <span class="font-semibold text-gray-900 dark:text-white"><%= Student.count %> Alunos</span>
+  </span>
 
-      <!-- Link para a próxima página -->
-      <% if params[:page].to_i < total_pages %>
-        <li>
-        <%= link_to 'Próxima', students_path(page: params[:page].to_i + 1, search: params[:search]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-        </li>
-      <% end %>
-    </ul>
+  <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+    <% if current_page > 1 %>
+      <li>
+        <%= link_to 'Anterior', students_path(page: current_page - 1, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+      </li>
+    <% end %>
+
+    <% (1..total_pages).each do |page| %>
+      <% is_current = page == current_page %>
+      <li>
+        <%= link_to page, students_path(page: page, search: params[:search]), class: "flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 #{is_current ? 'text-blue-600 bg-blue-50 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}" %>
+      </li>
+    <% end %>
+
+    <% if current_page < total_pages %>
+      <li>
+        <%= link_to 'Próxima', students_path(page: current_page + 1, search: params[:search]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
+</div>

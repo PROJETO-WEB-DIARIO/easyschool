@@ -16,7 +16,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">Turma</th>
-            <th scope="col" class="px-6 py-3">Ano</th>
+            <th scope="col" class="px-6 py-3">Ano Letivo</th>
             <th scope="col" class="px-6 py-3">Série</th>
             <th scope="col" class="px-6 py-3">Alunos</th> <%# Nova Coluna %>
             <th scope="col" class="px-6 py-3">Ações</th>
@@ -28,11 +28,11 @@
               <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= classroom.name %></td>
               <td class="px-6 py-4"><%= classroom.year %></td>
               <td class="px-6 py-4"><%= classroom.series %></td>
-              <td class="px-6 py-4"> <%# Conteúdo da Nova Coluna %>
+              <td class="px-6 py-4">
                 <% if classroom.students.any? %>
-                  <%= classroom.students.map(&:name).join(", ") %> <%# Lista nomes dos alunos separados por vírgula %>
+                  <%= classroom.students.count.to_s.rjust(2, '0') %>
                 <% else %>
-                  Nenhum aluno
+                  00
                 <% end %>
               </td>
               <td class="px-6 py-4 flex gap-2">

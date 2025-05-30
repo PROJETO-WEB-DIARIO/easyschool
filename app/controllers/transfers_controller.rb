@@ -34,6 +34,10 @@ class TransfersController < ApplicationController
 
     # Aplica a paginação
     @transfers = transfers_query.limit(@per_page).offset((@page - 1) * @per_page)
+
+    # Para uso genérico no layout de paginação
+    @items = @transfers
+    @total_items_count = @total_transfers_count
   end
 
   # GET /transfers/1 or /transfers/1.json
