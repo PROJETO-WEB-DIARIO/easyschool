@@ -1,0 +1,52 @@
+<% # app/views/transfers/_form.html.erb %>
+
+<%= form_with(model: transfer, class: "contents") do |form| %>
+  <% if transfer.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(transfer.errors.count, "erro") %> impediram que esta transferência fosse salva:</h2>
+
+      <ul class="list-disc ml-6">
+        <% transfer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :student_id, "Aluno", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.collection_select :student_id, Student.order(:name), :id, :name,
+      { prompt: 'Selecione um Aluno' },
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": transfer.errors[:student_id].any? }
+      ] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :school_destination, "Escola Destino", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.text_field :school_destination,
+      placeholder: "Nome da escola de destino",
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": transfer.errors[:school_destination].any? }
+      ] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :transfer_date, "Data da Transferência", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.date_field :transfer_date,
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": transfer.errors[:transfer_date].any? }
+      ] %>
+  </div>
+
+  <div class="inline mt-5">
+    <%= form.submit "Salvar Transferência", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <%= link_to "Cancelar", transfers_path, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-gray-600 hover:bg-gray-500 text-white inline-block font-medium cursor-pointer ml-2" %>
+  </div>
+<% end %>

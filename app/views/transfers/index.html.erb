@@ -1,0 +1,95 @@
+<% content_for :title, "Transferências" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="mb-10 font-bold text-4xl text-gray-900 dark:text-white">Transferências</h1>
+    <%= link_to "Nova Transferência", new_transfer_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <%# --- Barra de Pesquisa com Filtro --- %>
+  <div class="mb-6">
+    <%= form_with url: transfers_path, method: :get, local: true, class: "flex items-center gap-2" do |form| %>
+      <%# Campo de Seleção para o Filtro %>
+      <%= form.select :filter_by,
+        options_for_select([['Aluno', 'student_name'], ['Escola Destino', 'school_destination']], params[:filter_by]),
+        { prompt: 'Filtrar por...' },
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+
+      <%# Campo de Texto para a Pesquisa %>
+      <%= form.text_field :search,
+        placeholder: "Digite o termo de pesquisa...", # Placeholder mais genérico
+        value: params[:search],
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+
+      <%= form.submit "Localizar", class: "rounded-md px-3.5 py-2.5 bg-gray-600 hover:bg-gray-500 text-white font-medium cursor-pointer" %>
+      <% if params[:search].present? || params[:filter_by].present? %> <%# Condição para o botão Limpar %>
+        <%= link_to "Limpar", transfers_path, class: "rounded-md px-3.5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium cursor-pointer" %>
+      <% end %>
+    <% end %>
+  </div>
+  <%# --- Fim da Barra de Pesquisa com Filtro --- %>
+
+  <% if @transfers.any? %>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">Aluno</th>
+            <th scope="col" class="px-6 py-3">Escola Destino</th>
+            <th scope="col" class="px-6 py-3">Data da Transferência</th>
+            <th scope="col" class="px-6 py-3">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transfers.each do |transfer| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+              <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= transfer.student&.name || 'Aluno Removido' %>
+              </td>
+              <td class="px-6 py-4"><%= transfer.school_destination %></td>
+              <td class="px-6 py-4"><%= transfer.transfer_date&.strftime("%d/%m/%Y") %></td>
+              <td class="px-6 py-4 flex gap-2">
+                <%= link_to "Exibir", transfer, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                <%= link_to "Editar", edit_transfer_path(transfer), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                <%= button_to "Excluir", transfer, method: :delete, data: { turbo_confirm: "Tem certeza que deseja excluir esta transferência?" }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%# --- Bloco de Paginação (atualizado para incluir o search e filter_by param) --- %>
+    <nav aria-label="Page navigation example" class="flex justify-center mt-4">
+      <ul class="inline-flex -space-x-px text-base h-10">
+        <% if @page > 1 %>
+          <li>
+            <%= link_to 'Anterior', transfers_path(page: @page - 1, search: params[:search], filter_by: params[:filter_by]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+          </li>
+        <% end %>
+
+        <% total_pages = (@total_transfers_count / @per_page.to_f).ceil %>
+        <% (1..total_pages).each do |page| %>
+          <li>
+            <% current_page_class = (page == @page) ? "text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white" : "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+            <%= link_to page, transfers_path(page: page, search: params[:search], filter_by: params[:filter_by]), class: "flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 #{current_page_class}" %>
+          </li>
+        <% end %>
+
+        <% if @page < total_pages %>
+          <li>
+            <%= link_to 'Próxima', transfers_path(page: @page + 1, search: params[:search], filter_by: params[:filter_by]), data: { turbo_action: "replace" }, class: "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    <%# --- Fim do Bloco de Paginação --- %>
+
+  <% else %>
+    <p class="text-center my-10 text-gray-600 dark:text-gray-400">Nenhuma transferência encontrada.</p>
+  <% end %>
+</div>
