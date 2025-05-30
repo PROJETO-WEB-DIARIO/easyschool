@@ -21,9 +21,9 @@ class StudentsController < ApplicationController
     @total_students_count = if params[:search].present?
                               # ALTERE AQUI: Mude ILIKE para LIKE
                               Student.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%").count
-                            else
+    else
                               Student.count
-                            end
+    end
   end
 
   # GET /students/1 or /students/1.json
@@ -69,11 +69,11 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1 or /students/1.json
   def destroy
-    @student.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to students_path, status: :see_other, notice: "Student was successfully destroyed." }
-      format.json { head :no_content }
+    if @student.enrollments.any? || @student.transfers.any?
+      redirect_to students_path, alert: "Não é possível excluir um aluno com matrículas ou transferências."
+    else
+      @student.destroy
+      redirect_to students_path, notice: "Aluno excluído com sucesso."
     end
   end
 
