@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resources :alunos
+  resources :users
 
   root "alunos#index"
 

@@ -1,0 +1,39 @@
+<% content_for :title, "Editar Usuário" %>
+
+<h1 class="text-2xl font-semibold mb-4">Editar Usuário</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div class="bg-red-100 text-red-600 p-4 rounded-lg mb-4">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :email_address, class: "block text-gray-700" %>
+    <%= form.text_field :email_address, class: "w-full px-4 py-2 border border-gray-300 rounded-lg" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :role, class: "block text-gray-700" %>
+    <%= form.select :role, ['gestor', 'secretaria'], {}, class: "w-full px-4 py-2 border border-gray-300 rounded-lg" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :password, class: "block text-gray-700" %>
+    <%= form.password_field :password, class: "w-full px-4 py-2 border border-gray-300 rounded-lg" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :password_confirmation, class: "block text-gray-700" %>
+    <%= form.password_field :password_confirmation, class: "w-full px-4 py-2 border border-gray-300 rounded-lg" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.submit "Atualizar Usuário", class: "px-4 py-2 bg-blue-600 text-white rounded-lg" %>
+  </div>
+<% end %>

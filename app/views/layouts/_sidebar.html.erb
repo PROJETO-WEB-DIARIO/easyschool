@@ -27,7 +27,9 @@
             <% end %>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Usuários</a>
+            <%= link_to users_path, class: "flex items-center p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" do %>
+            <span class="flex-1 whitespace-nowrap text-left">Usuários</span>
+            <% end %>
          </li>
       </ul>
 
