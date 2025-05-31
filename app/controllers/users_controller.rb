@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    authorize @users
     if params[:search].present?
       @users = @users.where("email_address LIKE ?", "%#{params[:search]}%")
     end
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def update
