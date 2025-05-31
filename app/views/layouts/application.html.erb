@@ -28,5 +28,15 @@
         <%= yield %>
       </div>
     </div>
+
+    <%# Solução para o problema de reatividade do Flowbite com Turbo: %>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        if (window.initFlowbite) {
+          initFlowbite();
+        }
+      });
+    </script>
+
   </body>
 </html>
