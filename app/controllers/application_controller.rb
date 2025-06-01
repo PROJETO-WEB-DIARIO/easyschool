@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
-  before_action :require_authentication
   before_action :set_current_user
+  before_action :require_authentication
 
   helper_method :current_user
 
@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current_user
-    @current_user = User.find_by(id: session[:user_id]) if session[:user_id]  # Busca o usuário pela sessão
+    if session[:user_id]
+      @current_user = User.find_by(id: session[:user_id])
+      session.delete(:user_id) unless @current_user
+    end
   end
 
   def current_user
@@ -25,5 +28,18 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "Você não tem permissão para acessar essa página."
     redirect_to(request.referrer || root_path)
+  end
+
+  def after_authentication_url
+    dashboard_path
+  end
+
+  def require_authentication
+    unless current_user
+      respond_to do |format|
+        format.html { redirect_to new_session_path, alert: "Você precisa estar logado." }
+        format.turbo_stream { redirect_to new_session_path, status: :see_other }
+      end
+    end
   end
 end
