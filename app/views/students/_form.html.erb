@@ -16,12 +16,22 @@
   <div class="my-5">
     <%= form.label :name, "Nome", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.text_field :name,
-      placeholder: "Nome Completo do Aluno", # Atualizado placeholder
+      placeholder: "Nome Completo do Aluno",
       required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
         { "border-red-400 focus:outline-red-600": student.errors[:name].any? }
+      ] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :date_of_birth, "Data de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.date_field :date_of_birth,
+      class: [
+        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        { "border-red-400 focus:outline-red-600": student.errors[:date_of_birth].any? }
       ] %>
   </div>
 
@@ -175,16 +185,6 @@
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
         { "border-red-400 focus:outline-red-600": student.errors[:zip_code].any? }
-      ] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :date_of_birth, "Data de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-    <%= form.date_field :date_of_birth,
-      class: [
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
-        "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        { "border-red-400 focus:outline-red-600": student.errors[:date_of_birth].any? }
       ] %>
   </div>
 

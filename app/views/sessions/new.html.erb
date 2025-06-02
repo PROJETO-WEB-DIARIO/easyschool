@@ -1,33 +1,75 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <% if alert = flash[:alert] %>
-    <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Easy School" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%# Imports dos gráficos %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <%# Impoortação do flowbite %>
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
+    
+    <%= javascript_importmap_tags %>
+  </head>
 
-  <% if notice = flash[:notice] %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<div class="flex h-screen bg-white">
+  <!-- Lado esquerdo: fundo azul escuro com logo grande -->
+  <div class="hidden lg:flex items-center justify-center w-1/2 bg-[#1f2b3d]">
+    <img src="https://pub-cc9917beef4a4ccd908af381b1b2afb6.r2.dev/logo_easyschool_branco.png" alt="EasySchool Logo" class="w-150">
+  </div>
 
-  <h1 class="mb-10 font-bold text-4xl green-50 dark:text-white">Login</h1>
+  <!-- Lado direito: formulário de login -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-12">
+    <div class="w-full max-w-md">
+      <% if flash[:alert] %>
+        <p class="text-red-500 font-medium bg-red-50 p-3 rounded mb-4"><%= flash[:alert] %></p>
+      <% end %>
 
-  <%= form_with url: session_url, class: "contents" do |form| %>
-    <div class="my-5">
-      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "exemplo@easyschool.com", value: params[:email_address], class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+      <% if flash[:notice] %>
+        <p class="text-green-500 font-medium bg-green-50 p-3 rounded mb-4"><%= flash[:notice] %></p>
+      <% end %>
+
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Login</h2>
+
+      <%= form_with url: session_url, class: "space-y-6", local: true do |form| %>
+        <!-- Campo de email -->
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-envelope text-gray-400"></i>
+          </div>
+          <%= form.email_field :email_address,
+            placeholder: "Email",
+            required: true,
+            class: "pl-10 pr-4 py-3 w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+
+        <!-- Campo de senha -->
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fa-solid fa-key text-gray-400"></i>
+          </div>
+          <%= form.password_field :password,
+            placeholder: "Senha",
+            required: true,
+            class: "pl-10 pr-4 py-3 w-full rounded-md border border-gray-300 bg-gray-100 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+
+        <!-- Link para recuperação de senha -->
+        <div class="text-right text-sm">
+          <%= link_to "Esqueceu a senha?", new_password_path, class: "text-blue-600 hover:underline" %>
+        </div>
+
+        <!-- Botão de login -->
+        <div>
+          <%= form.submit "Entrar", class: "w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-md shadow transition-all duration-200" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="my-5">
-      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "", maxlength: 72, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-    </div>
-
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <div class="inline">
-        <%= form.submit "Logar", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-      </div>
-
-      <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-        <%= link_to "Esqueceu sua Senha?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 </div>
