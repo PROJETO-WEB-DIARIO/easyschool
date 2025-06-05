@@ -85,6 +85,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.expect(student: [ :name, :email, :date_of_birth, :cpf, :rg, :nationality, :gender, :race, :phone, :address, :city, :state, :zip_code, :father_name, :father_name_cpf, :mother_name, :mother_name_cpf, :has_family_allowance, :has_disability, :requires_religious_education_exemption, classroom_ids: [] ])
+      params.require(:student).permit(:name, :email, :date_of_birth, :cpf, :rg, :nationality, :birth_city, :birth_state, :gender, :skin_color_or_race, :phone, :address, :city, :state, :father_name, :father_cpf, :father_rg, :father_occupation, :zip_code, :mother_name, :mother_cpf, :mother_rg, :mother_occupation, classroom_ids: [])
     end
 end
