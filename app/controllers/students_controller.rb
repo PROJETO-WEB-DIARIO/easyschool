@@ -77,10 +77,78 @@ class StudentsController < ApplicationController
     end
   end
 
+  def export_pdf
+  @student = Student.find(params[:id])
+
+  pdf = Prawn::Document.new
+
+  pdf.text "Detalhes do Aluno", size: 24, style: :bold, align: :center
+  pdf.move_down 20
+
+  pdf.text "Nome: #{@student.name}", size: 12
+  pdf.text "Nascimento: #{@student.date_of_birth.strftime('%d/%m/%Y') if @student.date_of_birth}", size: 12
+  pdf.text "Município de Nascimento: #{@student.city}", size: 12
+  pdf.text "UF: #{@student.state}", size: 12
+  pdf.text "Sexo: #{@student.gender}", size: 12
+
+  # Exibir turmas
+  if @student.classrooms.any?
+    pdf.move_down 10
+    pdf.text "Turmas:", size: 12, style: :bold
+    @student.classrooms.each do |classroom|
+      pdf.text "- #{classroom.name}", size: 12
+    end
+  else
+    pdf.text "Turmas: Nenhuma", size: 12
+  end
+
+  send_data pdf.render,
+            filename: "aluno_#{@student.id}.pdf",
+            type: "application/pdf",
+            disposition: "inline"  # ou "attachment" para download
+  end
+
+  def export_all_pdf
+  students = if params[:search].present?
+             Student.where("name ILIKE ?", "%#{params[:search]}%")
+  else
+             Student.all
+  end
+
+  pdf = Prawn::Document.new
+  pdf.text "Lista de Alunos", size: 24, style: :bold, align: :center
+  pdf.move_down 20
+
+  table_data = [ [ "Nome", "Nascimento", "Turma(s)", "Município", "UF", "Sexo" ] ]
+
+  students.each do |s|
+    table_data << [
+      s.name,
+      s.date_of_birth&.strftime("%d/%m/%Y") || "-",
+      s.classrooms.any? ? s.classrooms.map(&:name).join(", ") : "Sem turma",
+      s.city,
+      s.state,
+      s.gender
+    ]
+  end
+
+  pdf.table(table_data, header: true, row_colors: [ "F0F0F0", "FFFFFF" ], cell_style: { size: 10 }) do
+    row(0).font_style = :bold
+    row(0).background_color = "CCCCCC"
+    self.header = true
+    self.position = :center
+  end
+
+  send_data pdf.render,
+            filename: "alunos.pdf",
+            type: "application/pdf",
+            disposition: "inline"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params.expect(:id))
+      @student = Student.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
