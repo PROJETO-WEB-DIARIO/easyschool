@@ -26,6 +26,18 @@
   </div>
 
   <div class="my-5">
+  <%= form.label :status, "Status", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.select :status,
+    ['Ativo', 'Desistente', 'Transferido',],
+    { include_blank: 'Selecione o status do aluno' },
+    class: [
+      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
+      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+      { "border-red-400 focus:outline-red-600": student.errors[:birth_state].any? }
+    ] %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :date_of_birth, "Data de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.date_field :date_of_birth,
       class: [
