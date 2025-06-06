@@ -56,6 +56,11 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
+    # Se nenhuma turma foi marcada, classroom_ids pode não vir — então limpamos manualmente
+    if params[:student][:classroom_ids].blank?
+      @student.classroom_ids = []
+    end
+
     respond_to do |format|
       if @student.update(student_params)
         format.html { redirect_to @student, notice: "Student was successfully updated." }
@@ -153,6 +158,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:name,:status, :email, :date_of_birth, :cpf, :rg, :nationality, :birth_city, :birth_state, :gender, :skin_color_or_race, :phone, :address, :city, :state, :father_name, :father_cpf, :father_rg, :father_occupation, :zip_code, :mother_name, :mother_cpf, :mother_rg, :mother_occupation, :has_family_allowance, :has_disability, :requires_religious_education_exemption, :transport,  classroom_ids: [])
+      params.require(:student).permit(:name, :status, :email, :date_of_birth, :cpf, :rg, :nationality, :birth_city, :birth_state, :gender, :skin_color_or_race, :phone, :address, :city, :state, :father_name, :father_cpf, :father_rg, :father_occupation, :zip_code, :mother_name, :mother_cpf, :mother_rg, :mother_occupation, :has_family_allowance, :has_disability, :requires_religious_education_exemption, :transport,  classroom_ids: [])
     end
 end
