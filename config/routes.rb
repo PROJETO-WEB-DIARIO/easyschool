@@ -19,6 +19,9 @@ end
 end
 
 
+get "documents", to: "documents#index"
+  post "documents/generate", to: "documents#generate", as: :generate_document
+
 
   root "students#index"
 

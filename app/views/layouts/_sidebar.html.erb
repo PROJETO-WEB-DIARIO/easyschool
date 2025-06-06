@@ -40,49 +40,11 @@
          </li>
 
          <li>
-            <!-- Botão para abrir o submenu "Documentos" -->
-            <label for="submenu-toggle-docs" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
-               <i class="material-icons text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white me-3">description</i>
+            <%= link_to documents_path, class: "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" do %>
+               <i class="material-icons text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white me-3">swap_horiz</i>
                <span class="flex-1 whitespace-nowrap text-left">Documentos</span>
-
-               <!-- Setinha: "<" quando fechado, "˅" quando aberto -->
-               <span class="ml-auto">
-                  <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 transition-transform duration-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" id="arrow-icon-docs"/>
-                  </svg>
-               </span>
-            </label>
-
-            <!-- Checkbox para controlar a visibilidade do submenu "Documentos" -->
-            <input type="checkbox" id="submenu-toggle-docs" class="hidden">
-
-            <!-- Submenu de "Documentos" -->
-            <ul class="py-2 space-y-2 pl-8 hidden" id="submenu-docs">
-               <li>
-                  <a href="#" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Levantamentos</a>
-               </li>
-               <li>
-                  <a href="#" class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Relatórios</a>
-               </li>
-            </ul>
-
-            <!-- Estilo CSS para mostrar/ocultar o submenu e rotacionar a setinha -->
-            <style>
-               /* Exibe o submenu quando o checkbox está marcado */
-               #submenu-toggle-docs:checked + ul {
-                  display: block;
-               }
-
-               /* Submenu oculto por padrão */
-               #submenu-docs {
-                  display: none;
-               }
-
-               /* Rotaciona a seta para baixo quando o submenu está aberto */
-               #submenu-toggle-docs:checked + ul + label svg {
-                  transform: rotate(180deg);  /* Rotaciona a seta para baixo */
-               }
-            </style>
+            </a>
+            <% end %>
          </li>
 
          <li>
