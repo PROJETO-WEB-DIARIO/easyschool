@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_05_001235) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_021523) do
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
     t.integer "year"
@@ -66,6 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_001235) do
     t.string "mother_occupation"
     t.string "father_rg"
     t.string "father_occupation"
+    t.boolean "transport"
   end
 
   create_table "transfers", force: :cascade do |t|

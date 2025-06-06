@@ -81,4 +81,8 @@
     <strong class="block font-medium mb-1">Requer dispensa da disciplina de ensino religioso:</strong>
     <%= student.requires_religious_education_exemption? ? "Sim" : "Não" %>
   </div>
+  <div>
+    <strong class="block font-medium mb-1">Requer transporte escolar:</strong>
+    <%= student.transport? ? "Sim" : "Não" %>
+  </div>
 </div>
