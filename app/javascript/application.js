@@ -3,10 +3,10 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "chartkick"
 import "chart.js"
-import "chartjs-adapter-date-fns"
+import adapter from "chartjs-adapter-date-fns";
 
-// Registrar o adaptador de data
-// Chart.register(require("chartjs-adapter-date-fns"));
+
+
 
 document.addEventListener('turbo:load', function() {
     const tipoSelect = document.querySelector('[name="document_type"]');

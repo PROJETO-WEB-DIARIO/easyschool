@@ -13,12 +13,12 @@
 <%= form_with url: generate_document_path, method: :post, data: { turbo: false }, html: { target: '_blank' } do %>
       <div class="mb-4">
         <%= label_tag :classroom_id, "Turma", class: "block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <%= select_tag :classroom_id, options_from_collection_for_select(@classrooms, :id, :name), prompt: "Selecione uma turma", class: "form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" %>
+        <%= select_tag :classroom_id, options_from_collection_for_select(@classrooms, :id, :name), prompt: "Selecione uma turma", class: "form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600", required: true %>
       </div>
 
       <div class="mb-4">
         <%= label_tag :document_type, "Tipo de Documento", class: "block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <%= select_tag :document_type, options_for_select([["Folha de Frequência", "frequencia"], ["Folha de Notas", "notas"]]), prompt: "Escolha o tipo", class: "form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" %>
+        <%= select_tag :document_type, options_for_select([["Folha de Frequência", "frequencia"], ["Folha de Notas", "notas"]]), prompt: "Escolha o tipo", class: "form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600", required: true %>
       </div>
 
       <div class="mb-4">

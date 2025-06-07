@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
     # --- INÍCIO DA LÓGICA DE DIAS DINÂMICOS ---
 
     month_name = params[:month].presence || "_________________"
-    year = 2025 # O ano que estamos usando, importante para anos bissextos (Fevereiro)
+    year = Time.now.year # O ano que estamos usando, importante para anos bissextos (Fevereiro)
 
     # NOVO: Converte o nome do mês (em português) para um número de 1 a 12
     month_number = case month_name.downcase
@@ -62,7 +62,7 @@ class DocumentsController < ApplicationController
     pdf = Prawn::Document.new(page_size: "A4", page_layout: :landscape, margin: [ 40, 40, 40, 40 ])
 
     # O cabeçalho continua igual...
-    logo_path = Rails.root.join("app", "assets", "images", "logo.png")
+    logo_path = Rails.root.join("app", "assets", "images", "logo_escola.jpg")
     pdf.bounding_box([ 85, pdf.cursor ], width: 200, height: 50) do
       pdf.text "ESCOLA MUNICIPAL", size: 14, style: :bold
       pdf.text "06 DE MARÇO", size: 14, style: :bold
