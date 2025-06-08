@@ -1,91 +1,147 @@
-<div id="<%= dom_id student %>" class="w-full my-6 p-6 rounded-lg border border-gray-200 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700 space-y-4">
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-800 dark:text-gray-100">
+<div class="w-full max-w-4xl mx-auto sm:ml-0 sm:mr-0 my-8 p-8 rounded-lg border border-gray-200 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Perfil do Aluno</h2>
+
+  <!-- === Dados Pessoais === -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <%# Campo: Nome %>
     <div>
-      <strong class="block font-medium mb-1">Nome do aluno:</strong>
-      <%= student.name %>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+      <input type="text" value="<%= @student.name %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
     </div>
-     <div>
-      <strong class="block font-medium mb-1">Status:</strong>
-      <%= student.status %>
+
+    <%# Campo: Status %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+      <input type="text" value="<%= @student.status %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
     </div>
-  <div>
-    <strong class="block font-medium mb-1">Data de Nascimento:</strong>
-    <%= student.date_of_birth %>
+
+    <%# Campo: Data de Nascimento %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Data de Nascimento</label>
+      <input type="text" value="<%= @student.date_of_birth&.strftime('%d/%m/%Y') %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Campo: Email %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+      <input type="text" value="<%= @student.email %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Campo: CPF %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
+      <input type="text" value="<%= @student.cpf %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Campo: RG %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">RG</label>
+      <input type="text" value="<%= @student.rg %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Nacionalidade %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Nacionalidade</label>
+      <input type="text" value="<%= @student.nationality %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Município de Nascimento %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Município de Nascimento</label>
+      <input type="text" value="<%= @student.birth_city %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# UF de Nascimento %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">UF de Nascimento</label>
+      <input type="text" value="<%= @student.birth_state %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Sexo %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Sexo</label>
+      <input type="text" value="<%= @student.gender %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
+
+    <%# Cor/Raça %>
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Cor/Raça</label>
+      <input type="text" value="<%= @student.skin_color_or_race %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+    </div>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= student.email %>
+
+  <!-- === Endereço === -->
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 mt-10">Endereço</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
+    <input type="text" value="<%= @student.phone %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
+    <input type="text" value="<%= @student.address %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
+    <input type="text" value="<%= @student.city %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Estado (UF)</label>
+    <input type="text" value="<%= @student.state %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">CEP</label>
+    <input type="text" value="<%= @student.zip_code %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">CPF:</strong>
-    <%= student.cpf %>
+
+  <!-- === Responsáveis === -->
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 mt-10">Responsáveis</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Nome da Mãe</label>
+    <input type="text" value="<%= @student.mother_name %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">CPF da Mãe</label>
+    <input type="text" value="<%= @student.mother_cpf %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">RG da Mãe</label>
+    <input type="text" value="<%= @student.mother_rg %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Profissão da Mãe</label>
+    <input type="text" value="<%= @student.mother_occupation %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Nome do Pai</label>
+    <input type="text" value="<%= @student.father_name %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">CPF do Pai</label>
+    <input type="text" value="<%= @student.father_cpf %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">RG do Pai</label>
+    <input type="text" value="<%= @student.father_rg %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Profissão do Pai</label>
+    <input type="text" value="<%= @student.father_occupation %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">RG:</strong>
-    <%= student.rg %>
+
+  <!-- === Informações Adicionais === -->
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 mt-10">Informações Adicionais</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Possui Bolsa Família</label>
+    <input type="text" value="<%= @student.has_family_allowance? ? 'Sim' : 'Não' %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Possui Deficiência</label>
+    <input type="text" value="<%= @student.has_disability? ? 'Sim' : 'Não' %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Dispensa Ensino Religioso</label>
+    <input type="text" value="<%= @student.requires_religious_education_exemption? ? 'Sim' : 'Não' %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
+
+    <div><label class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Requer Transporte Escolar</label>
+    <input type="text" value="<%= @student.transport? ? 'Sim' : 'Não' %>" disabled class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /></div>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Nacionalidade:</strong>
-    <%= student.nationality %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Sexo:</strong>
-    <%= student.gender %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Raça:</strong>
-    <%= student.skin_color_or_race %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Telefone:</strong>
-    <%= student.phone %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Endereço:</strong>
-    <%= student.address %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Cidade:</strong>
-    <%= student.city %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Estado:</strong>
-    <%= student.state %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">CEP:</strong>
-    <%= student.zip_code %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Nome do Pai:</strong>
-    <%= student.father_name %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">CPF Pai:</strong>
-    <%= student.father_cpf %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Nome da Mãe:</strong>
-    <%= student.mother_name %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">CPF Mãe:</strong>
-    <%= student.mother_cpf %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Possui Bolsa Familia:</strong>
-    <%= student.has_family_allowance? ? "Sim" : "Não" %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Possui Deficiência:</strong>
-    <%= student.has_disability? ? "Sim" : "Não" %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Requer dispensa da disciplina de ensino religioso:</strong>
-    <%= student.requires_religious_education_exemption? ? "Sim" : "Não" %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Requer transporte escolar:</strong>
-    <%= student.transport? ? "Sim" : "Não" %>
-  </div>
+
+  <!-- === Turmas === -->
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 mt-10">Turmas</h3>
+  <% if @student.classrooms.any? %>
+    <ul class="list-disc list-inside text-sm text-gray-800 dark:text-gray-200">
+      <% @student.classrooms.each do |classroom| %>
+        <li><%= classroom.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-sm text-gray-600 dark:text-gray-400">Este aluno não está vinculado a nenhuma turma.</p>
+  <% end %>
 </div>
