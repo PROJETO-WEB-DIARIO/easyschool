@@ -4,10 +4,14 @@ class DashboardController < ApplicationController
     @total_classrooms = Classroom.count
     @total_sessions = Session.count
 
+    # Alunos por status específico
+    @total_transferidos = Student.where(status: "Transferido").count
+    @total_desistentes = Student.where(status: "Desistente").count
+
     # Distribuição de sexo dos alunos
     @gender_distribution = Student.group(:gender).count
 
-    # Calculando a idade dos alunos, ignorando alunos sem data de nascimento
+    # Distribuição de idade
     @age_distribution = Student.all.group_by do |student|
       next if student.date_of_birth.nil?
       Date.today.year - student.date_of_birth.year

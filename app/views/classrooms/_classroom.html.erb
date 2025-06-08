@@ -17,16 +17,16 @@
         <p><%= classroom.series %></p>
       </div>
       <div>
-        <strong class="block font-medium mb-1">Total de Alunos:</strong>
-        <p><%= classroom.students.count %></p>
-      </div>
-      <div>
         <strong class="block font-medium mb-1">Alunos Ativos:</strong>
         <p><%= classroom.students.where(status: "Ativo").count %></p>
       </div>
       <div>
         <strong class="block font-medium mb-1">Alunos Transferidos:</strong>
         <p><%= classroom.students.where(status: "Transferido").count %></p>
+      </div>
+      <div>
+        <strong class="block font-medium mb-1">Alunos Desistentes:</strong>
+        <p><%= classroom.students.where(status: "Desistente").count %></p>
       </div>
     </div>
   </div>
