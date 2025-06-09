@@ -53,7 +53,7 @@ class DocumentsController < ApplicationController
     if month_number
       days_in_month = Time.days_in_month(month_number, year)
     else
-      days_in_month = 30 # Valor padrão
+      days_in_month = 31 # Valor padrão
     end
 
     # --- FIM DA LÓGICA DE DIAS DINÂMICOS ---
