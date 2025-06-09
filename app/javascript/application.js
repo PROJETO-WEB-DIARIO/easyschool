@@ -8,12 +8,12 @@ import adapter from "chartjs-adapter-date-fns";
 
 
 
-document.addEventListener('turbo:load', function() {
-    const tipoSelect = document.querySelector('[name="document_type"]');
-    const extraField = document.getElementById('extra-field');
+document.addEventListener('turbo:load', function () {
+  const tipoSelect = document.querySelector('[name="document_type"]');
+  const extraField = document.getElementById('extra-field');
 
-    if (tipoSelect && extraField)  {
-        tipoSelect.addEventListener('change', function () {
+  if (tipoSelect && extraField) {
+    tipoSelect.addEventListener('change', function () {
 
       const tipo = this.value;
       let html = '';
@@ -21,7 +21,11 @@ document.addEventListener('turbo:load', function() {
       if (tipo === 'frequencia') {
         // --- INÍCIO DO BLOCO DE CÓDIGO ALTERADO ---
         html = `
-          <div class="mb-4">
+              <div class="mb-4">
+              <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Nome do Professor(a)</label>
+              <input type="text" name="professor" class="form-input w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
+              </div>
+              <div class="mb-4">
             <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Mês</label>
             <select name="month" class="form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600">
               <option value="">Selecione um mês</option>
@@ -48,6 +52,10 @@ document.addEventListener('turbo:load', function() {
       } else if (tipo === 'notas') {
         // --- INÍCIO DO BLOCO DE CÓDIGO SUGERIDO ---
         html = `
+              <div class="mb-4">
+              <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Nome do Professor(a)</label>
+              <input type="text" name="professor" class="form-input w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
+              </div>
           <div class="mb-4">
             <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Bimestre</label>
             <select name="bimestre" class="form-select w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600">
@@ -62,11 +70,17 @@ document.addEventListener('turbo:load', function() {
             <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Disciplina</label>
             <input type="text" name="discipline" class="form-input w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
           </div>
+          
         `;
         // --- FIM DO BLOCO DE CÓDIGO SUGERIDO ---
+      } else if (tipo === 'pauta') {
+        html = `
+    <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Descrição do Evento</label>
+    <input type="text" name="descricao" value=" (${new Date().toLocaleDateString('pt-BR')})" class="form-input w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
+  `;
       }
 
       extraField.innerHTML = html;
     });
-    } 
-  });
+  }
+});

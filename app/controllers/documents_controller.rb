@@ -13,6 +13,8 @@ class DocumentsController < ApplicationController
       generate_frequency_sheet
     when "notas"
       generate_grades_sheet
+    when "pauta"
+    generate_signature_sheet
     else
       redirect_to documents_path, alert: "Tipo de documento inválido"
     end
@@ -182,6 +184,40 @@ class DocumentsController < ApplicationController
     end
 
     render_pdf(pdf, "notas_#{@classroom.name.parameterize}.pdf")
+  end
+
+  def generate_signature_sheet
+  descricao = params[:descricao].presence || "PAUTA DE ASSINATURA"
+  pdf = Prawn::Document.new(page_size: "A4", margin: [ 40, 40, 40, 40 ])
+
+  logo_path = Rails.root.join("app", "assets", "images", "logo_escola.jpg")
+  pdf.image(logo_path, width: 70) if File.exist?(logo_path)
+  pdf.move_down 10
+
+  pdf.text descricao.upcase, size: 14, style: :bold, align: :center
+  pdf.move_down 5
+  pdf.text "#{@classroom.name.upcase}", size: 12, style: :bold, align: :center
+  pdf.move_down 20
+
+  pdf.text "NOME DO ALUNO", size: 10, style: :bold
+  pdf.move_down 5
+
+  table_data = [ [ "Nº", "Nome do Aluno", "Assinatura" ] ]
+  @students.each_with_index do |student, i|
+    table_data << [ "%02d" % (i + 1), student.name, "" ]
+  end
+
+  pdf.table(table_data, header: true, width: pdf.bounds.width) do
+    row(0).font_style = :bold
+    row(0).background_color = "eeeeee"
+    columns(0).width = 30
+    columns(1).width = 300
+    columns(2).width = pdf.bounds.width - 330
+    cells.padding = 6
+    cells.size = 10
+  end
+
+  render_pdf(pdf, "pauta_#{@classroom.name.parameterize}.pdf")
   end
 
   def render_pdf(pdf, filename)
