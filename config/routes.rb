@@ -17,6 +17,7 @@ end
 resources :users do
   member do
     patch :avatar, to: "users#update_avatar"
+    delete :remove_avatar
   end
 end
 

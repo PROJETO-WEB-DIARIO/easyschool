@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def update_avatar
   @user = User.find(params[:id])
-  if params[:user][:avatar]
+  if params[:user]&.[](:avatar)
     @user.avatar.attach(params[:user][:avatar])
     redirect_back fallback_location: dashboard_path, notice: "Imagem atualizada com sucesso!"
   else
@@ -50,9 +50,20 @@ class UsersController < ApplicationController
   end
   end
 
+  def remove_avatar
+  current_user.avatar.purge if current_user.avatar.attached?
+  redirect_to dashboard_path, notice: "Imagem removida com sucesso."
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email_address, :role, :password, :password_confirmation)
+    params.require(:user).permit(:name, :avatar, :email_address, :role, :password, :password_confirmation)
   end
+
+    def avatar_params
+    # .require(:user) FORÇA que a chave :user exista nos parâmetros.
+    # .permit(:avatar) permite APENAS a chave :avatar dentro de :user.
+    params.require(:user).permit(:avatar)
+    end
 end

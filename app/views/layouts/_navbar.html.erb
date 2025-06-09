@@ -1,6 +1,6 @@
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   
-  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+  <div class="px-3 py-3 lg:pl-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -35,7 +35,7 @@
 
             </div>
             <div id="dropdown-user"
-     class="absolute top-14 right-4 z-50 hidden w-72 rounded-md bg-white/90 backdrop-blur-md shadow-xl ring-3 ring-gray-300 dark:bg-gray-800/90 dark:ring-gray-600">
+     class="absolute top-14 right-4 z-50 hidden w-63 rounded-md bg-white/90 backdrop-blur-md shadow-xl ring-3 ring-gray-300 dark:bg-gray-800/90 dark:ring-gray-600">
   <div class="px-4 py-3">
     <p class="text-sm text-gray-900 dark:text-white"><%= current_user.name %></p>
     <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"><%= current_user.email_address %></p>
@@ -48,9 +48,16 @@
     Escolher Imagem
   </label>
   <%= f.file_field :avatar, id: "avatar-upload", class: "hidden", accept: "image/png,image/jpeg,image/jpg,image/webp" %>
-  <%= f.submit "Atualizar", class: "mt-2 text-sm text-blue-600 hover:underline block" %>
+  <%= f.submit "Atualizar", data: { turbo_confirm: "Tem certeza que deseja atualizar sua imagem de perfil?" }, class: "cursor-pointer bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium py-2 px-3 rounded-md inline-block" %>
+  
+  
 <% end %>
     </li>
+    <%= button_to "Remover Imagem",
+              remove_avatar_user_path(current_user),
+              method: :delete,
+              data: { turbo_confirm: "Tem certeza que deseja remover sua imagem de perfil?" },
+              class: "w-full text-red-600 hover:underline text-sm block text-center" %>
 
     <li>
       <%= form_with url: session_path, method: :delete, class: "block w-full", local: true do %>
