@@ -83,5 +83,8 @@ document.addEventListener('turbo:load', function () {
       extraField.innerHTML = html;
     });
   }
+
+  
+  
 });
 

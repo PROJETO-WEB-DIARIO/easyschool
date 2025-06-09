@@ -39,22 +39,33 @@
       });
     </script>
 
-<script>
-  function toggleUserDropdown() {
-    const menu = document.getElementById("dropdown-user");
-    const backdrop = document.getElementById("user-backdrop");
+    <script>
+    document.addEventListener("turbo:load", () => {
+    const dropdown = document.getElementById("dropdown-user");
+    const avatarBtn = document.getElementById("user-avatar-button");
 
-    const isOpen = menu.classList.contains("hidden");
-    menu.classList.toggle("hidden", !isOpen);
-    backdrop.classList.toggle("hidden", !isOpen);
-  }
+    function closeDropdown() {
+      dropdown.classList.add("hidden");
+    }
 
-  function closeUserDropdown() {
-    document.getElementById("dropdown-user").classList.add("hidden");
-    document.getElementById("user-backdrop").classList.add("hidden");
-  }
-</script>
+    function toggleUserDropdown() {
+      dropdown.classList.toggle("hidden");
+    }
 
+    // Expor para o botão onclick
+    window.toggleUserDropdown = toggleUserDropdown;
+
+    // Fecha ao clicar fora
+    document.addEventListener("click", (e) => {
+      const clickedInsideMenu = dropdown.contains(e.target);
+      const clickedAvatar = avatarBtn.contains(e.target);
+
+      if (!clickedInsideMenu && !clickedAvatar) {
+        closeDropdown();
+      }
+      });
+      });
+    </script>
 
   </body>
 </html>
