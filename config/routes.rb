@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :students do
   collection do
     get :export_all_pdf
+    end
+    member do
+    get :export_pdf
   end
 end
   get "dashboard", to: "dashboard#index"
@@ -10,11 +13,10 @@ end
   resources :classrooms
   resource :session
   resources :passwords, param: :token
-  resources :users
 
-  resources :students do
+resources :users do
   member do
-    get :export_pdf
+    patch :avatar, to: "users#update_avatar"
   end
 end
 

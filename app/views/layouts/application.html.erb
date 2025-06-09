@@ -39,5 +39,22 @@
       });
     </script>
 
+<script>
+  function toggleUserDropdown() {
+    const menu = document.getElementById("dropdown-user");
+    const backdrop = document.getElementById("user-backdrop");
+
+    const isOpen = menu.classList.contains("hidden");
+    menu.classList.toggle("hidden", !isOpen);
+    backdrop.classList.toggle("hidden", !isOpen);
+  }
+
+  function closeUserDropdown() {
+    document.getElementById("dropdown-user").classList.add("hidden");
+    document.getElementById("user-backdrop").classList.add("hidden");
+  }
+</script>
+
+
   </body>
 </html>

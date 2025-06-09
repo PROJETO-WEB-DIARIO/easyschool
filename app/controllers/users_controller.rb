@@ -40,6 +40,16 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "Usuário excluído com sucesso."
   end
 
+  def update_avatar
+  @user = User.find(params[:id])
+  if params[:user][:avatar]
+    @user.avatar.attach(params[:user][:avatar])
+    redirect_back fallback_location: dashboard_path, notice: "Imagem atualizada com sucesso!"
+  else
+    redirect_back fallback_location: dashboard_path, alert: "Nenhuma imagem selecionada."
+  end
+  end
+
   private
 
   def user_params
