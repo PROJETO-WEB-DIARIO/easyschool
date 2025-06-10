@@ -57,20 +57,20 @@
   </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
   <div class="bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
     <h2 class="text-xl font-semibold mb-4">Alunos por Sexo</h2>
-    <%# O id do gráfico deve ser único se você tiver vários gráficos do mesmo tipo na página %>
     <%= pie_chart @gender_distribution, id: "sexo-distribuicao", height: "300px", donut: true, legend: "bottom" %>
   </div>
 
   <div class="bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
     <h2 class="text-xl font-semibold mb-4">Alunos por Idade</h2>
-    <%= bar_chart @age_distribution, id: "idade-distribuicao", height: "300px", xtitle: "Quantidade de Alunos", ytitle: "Idade" %>
+    <%# Mudei para column_chart para barras verticais %>
+    <%= column_chart @age_distribution, id: "idade-distribuicao", height: "300px", xtitle: "Idade", ytitle: "Quantidade de Alunos", library: { scales: { x: { type: 'category' } } } %>
   </div>
 
-  <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
+  <div class="bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
     <h2 class="text-xl font-semibold mb-4">Turmas por Série</h2>
-    <%= column_chart @classrooms_by_series, id: "turmas-por-serie", height: "350px", xtitle: "Série", ytitle: "Quantidade de Turmas", library: { scales: { x: { type: 'category' } } } %>
+    <%= column_chart @classrooms_by_series, id: "turmas-por-serie", height: "300px", xtitle: "Série", ytitle: "Quantidade de Turmas", library: { scales: { x: { type: 'category' } } } %>
   </div>
 </div>
