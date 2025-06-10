@@ -11,6 +11,11 @@ end
   get "dashboard", to: "dashboard#index"
 
   resources :classrooms
+  resources :classrooms do
+    member do
+      get "export_students_pdf"
+    end
+  end
   resource :session
   resources :passwords, param: :token
 

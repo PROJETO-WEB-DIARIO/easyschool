@@ -1,41 +1,76 @@
 <h1 class="mb-10 font-bold text-4xl green-50 dark:text-white">Dashboard</h1>
 
-<div class="grid grid-cols-4 gap-6">
-  <!-- Total de Alunos -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   <div class="bg-white p-4 rounded-lg shadow-md">
     <h2 class="text-xl font-semibold">Total de Alunos</h2>
-    <p class="text-2xl font-bold"><%= @total_students%></p>
+    <p class="text-3xl font-bold mt-2"><%= @total_students %></p>
   </div>
 
-  <!-- Total de Turmas (Classrooms) -->
   <div class="bg-white p-4 rounded-lg shadow-md">
     <h2 class="text-xl font-semibold">Total de Turmas</h2>
-    <p class="text-2xl font-bold"><%= @total_classrooms %></p>
+    <p class="text-3xl font-bold mt-2"><%= @total_classrooms %></p>
   </div>
 
-  <!-- Alunos Transferidos -->
   <div class="bg-white p-4 rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold">Transferidos</h2>
-    <p class="text-2xl font-bold"><%= @total_transferidos %></p>
+    <h2 class="text-xl font-semibold">Alunos Ativos</h2>
+    <p class="text-3xl font-bold mt-2"><%= @total_ativos %></p>
   </div>
 
-  <!-- Alunos Desistentes -->
   <div class="bg-white p-4 rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold">Desistentes</h2>
-    <p class="text-2xl font-bold"><%= @total_desistentes %></p>
+    <h2 class="text-xl font-semibold">Alunos Transferidos</h2>
+    <p class="text-3xl font-bold mt-2"><%= @total_transferidos %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Alunos Desistentes</h2>
+    <p class="text-3xl font-bold mt-2"><%= @total_desistentes %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Com Bolsa Família</h2>
+    <p class="text-3xl font-bold mt-2"><%= @students_with_family_allowance %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Com Deficiência</h2>
+    <p class="text-3xl font-bold mt-2"><%= @students_with_disability %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Requerem Transporte</h2>
+    <p class="text-3xl font-bold mt-2"><%= @students_requiring_transport %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Novos Alunos (Este Mês)</h2>
+    <p class="text-3xl font-bold mt-2"><%= @new_students_this_month %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Novos Alunos (Este Ano)</h2>
+    <p class="text-3xl font-bold mt-2"><%= @new_students_this_year %></p>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold">Média Alunos/Turma</h2>
+    <p class="text-3xl font-bold mt-2"><%= @average_students_per_classroom %></p>
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6">
-  <div class="mt-8 p-4 rounded-lg shadow-md text-xs text-gray-700 bg-white dark:bg-white dark:text-black">
-    <!-- Gráfico de Distribuição de Sexo -->
-    <h2 class="text-xl font-semibold mb-4">Quantidade de Alunos por Sexo</h2>
-    <%= pie_chart @gender_distribution, id: "sexo-distribuicao", height: "300px" %>
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+  <div class="bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
+    <h2 class="text-xl font-semibold mb-4">Alunos por Sexo</h2>
+    <%# O id do gráfico deve ser único se você tiver vários gráficos do mesmo tipo na página %>
+    <%= pie_chart @gender_distribution, id: "sexo-distribuicao", height: "300px", donut: true, legend: "bottom" %>
   </div>
 
-  <div class="mt-8 bg-white p-4 rounded-lg shadow-md">
-    <!-- Gráfico de Distribuição de Alunos por idade -->
-    <h2 class="text-xl font-semibold mb-4">Quantidade de Alunos por Idade</h2>
+  <div class="bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
+    <h2 class="text-xl font-semibold mb-4">Alunos por Idade</h2>
     <%= bar_chart @age_distribution, id: "idade-distribuicao", height: "300px", xtitle: "Quantidade de Alunos", ytitle: "Idade" %>
+  </div>
+
+  <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md text-gray-700 dark:bg-white dark:text-black">
+    <h2 class="text-xl font-semibold mb-4">Turmas por Série</h2>
+    <%= column_chart @classrooms_by_series, id: "turmas-por-serie", height: "350px", xtitle: "Série", ytitle: "Quantidade de Turmas", library: { scales: { x: { type: 'category' } } } %>
   </div>
 </div>
