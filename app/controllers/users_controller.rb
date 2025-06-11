@@ -30,14 +30,19 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to users_path, notice: "Usuário atualizado com sucesso."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    if @user.destroy
     redirect_to users_path, notice: "Usuário excluído com sucesso."
+    else
+      # Esta parte agora vai lidar com a falha da exclusão do último admin
+      # A mensagem de erro vem diretamente do modelo que adicionamos
+      redirect_to users_path, alert: @user.errors.full_messages.join(", ")
+    end
   end
 
   def update_avatar
