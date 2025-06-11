@@ -45,7 +45,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: "Student was successfully created." }
+        format.html { redirect_to @student, notice: "Aluno Criado com Sucesso." }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: "Student was successfully updated." }
+        format.html { redirect_to @student, notice: "Aluno Atualizado com Sucesso." }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -78,7 +78,7 @@ class StudentsController < ApplicationController
       redirect_to students_path, alert: "Não é possível excluir um aluno com matrículas ou transferências."
     else
       @student.destroy
-      redirect_to students_path, notice: "Aluno excluído com sucesso."
+      redirect_to students_path, notice: "Aluno Excluído com Sucesso."
     end
   end
 

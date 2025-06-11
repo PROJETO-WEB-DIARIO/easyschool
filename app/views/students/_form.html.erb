@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :name, "Nome", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :name, "Nome *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.text_field :name,
       placeholder: "Nome Completo do Aluno",
       required: true,
@@ -26,10 +26,11 @@
   </div>
 
   <div class="my-5">
-  <%= form.label :status, "Status", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.label :status, "Status *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
   <%= form.select :status,
     ['Ativo', 'Desistente', 'Transferido',],
     { include_blank: 'Selecione o status do aluno' },
+    required: true,
     class: [
       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
       "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -38,8 +39,9 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :date_of_birth, "Data de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :date_of_birth, "Data de Nascimento *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.date_field :date_of_birth,
+      required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -81,9 +83,10 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :nationality, "Nacionalidade", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :nationality, "Nacionalidade *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.text_field :nationality,
       placeholder: "Brasileira",
+      required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -92,9 +95,10 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :birth_city, "Município de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :birth_city, "Município de Nascimento *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.text_field :birth_city,
       placeholder: "Nome da Cidade de Nascimento",
+      required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -103,12 +107,13 @@
   </div>
 
   <div class="my-5">
-  <%= form.label :birth_state, "UF de Nascimento", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+  <%= form.label :birth_state, "UF de Nascimento *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
   <%= form.select :birth_state,
     ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
      'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
      'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
     { include_blank: 'Selecione a UF de Nascimento' },
+    required: true,
     class: [
       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
       "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -117,10 +122,11 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :gender, "Sexo", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :gender, "Sexo *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%# Você pode usar um select para Sexo, que é mais robusto %>
     <%= form.select :gender, ['Masculino', 'Feminino', 'Outro', 'Não Declarado'],
       { include_blank: 'Selecione o Sexo' },
+      required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -203,9 +209,10 @@
   <h3 class="text-lg font-semibold green-50 dark:text-white">Dados da Mãe</h3>
 
   <div class="my-5">
-    <%= form.label :mother_name, "Nome da Mãe", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.label :mother_name, "Nome da Mãe *", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
     <%= form.text_field :mother_name,
       placeholder: "Nome Completo da Mãe",
+      required: true,
       class: [
         "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -297,7 +304,7 @@
   <div class="my-5">
     <div class="flex items-center">
       <%= form.check_box :has_family_allowance, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-      <%= form.label :has_family_allowance, "Possui Bolsa Família?", class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      <%= form.label :has_family_allowance, "Responsável recebe Bolsa Família?", class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     </div>
   </div>
 

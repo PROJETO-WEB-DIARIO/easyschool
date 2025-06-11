@@ -25,7 +25,7 @@ class ClassroomsController < ApplicationController
 
     respond_to do |format|
       if @classroom.save
-        format.html { redirect_to @classroom, notice: "Classroom was successfully created." }
+        format.html { redirect_to @classroom, notice: "Turma Criada com Sucesso." }
         format.json { render :show, status: :created, location: @classroom }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class ClassroomsController < ApplicationController
   def update
     respond_to do |format|
       if @classroom.update(classroom_params)
-        format.html { redirect_to @classroom, notice: "Classroom was successfully updated." }
+        format.html { redirect_to @classroom, notice: "Turma Atualizada com Sucesso." }
         format.json { render :show, status: :ok, location: @classroom }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class ClassroomsController < ApplicationController
     if @classroom.students.any?
       respond_to do |format|
         format.html { redirect_to classrooms_url, alert: "Não foi possível excluir a turma '#{@classroom.name}' porque ela ainda possui alunos vinculados." }
-        format.json { render json: { error: "Cannot delete classroom with associated students." }, status: :unprocessable_entity }
+        format.json { render json: { error: "Não é possível excluir a turma porque ela ainda possui alunos vinculados." }, status: :unprocessable_entity }
       end
     else
       @classroom.destroy!
